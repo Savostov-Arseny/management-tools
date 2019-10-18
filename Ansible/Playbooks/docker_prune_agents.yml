@@ -1,0 +1,14 @@
+### playbook.yml
+---
+    - name: Swarm Agents prune
+      hosts: tag_Name_Swarm_agent*
+      become: true
+      remote_user: ubuntu
+      gather_facts: False
+      vars:
+      tasks:
+        - name: prune
+          command: docker system prune -af
+          register: worker
+        - name: Show stdout
+          debug: var=worker.stdout 

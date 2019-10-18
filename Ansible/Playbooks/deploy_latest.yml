@@ -1,0 +1,14 @@
+### playbook.yml
+---
+    - name: Deploy latest versions from docker.hub
+      hosts: tag_Name_Swarm_master
+      become: true
+      gather_facts: False
+      remote_user: ubuntu
+      tasks:
+        - name: Pull stack.yml
+          shell: curl 'https://raw.githubusercontent.com/Savostov-Arseny/piggymetrics/master/stack.yml' -O
+          args:
+            warn: no
+        - name: Deploy stack
+          command: docker stack deploy --compose-file stack.yml piggymetrics

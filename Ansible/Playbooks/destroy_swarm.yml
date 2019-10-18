@@ -1,0 +1,26 @@
+### playbook.yml
+---
+    - name: Swarm Agents leave
+      hosts: tag_Name_Swarm_agent*
+      become: true
+      remote_user: ubuntu
+      gather_facts: False
+      vars:
+      tasks:
+        - name: leave swarm
+          command: docker swarm leave
+          register: worker
+        - name: Show stdout
+          debug: var=worker.stdout
+
+    - name: Swarm master leave
+      hosts: tag_Name_Swarm_master
+      become: true
+      gather_facts: False
+      remote_user: ubuntu
+      tasks:
+        - name: leave swarm as master
+          command: docker swarm leave --force
+          register: master
+        - name: Show stdout
+          debug: var=master.stdout

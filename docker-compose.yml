@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+   jenkins:
+      container_name: jenkins_master
+      image: jenkins
+      build:
+        context: Jenkins_master
+      ports:
+         - "8080:8080"
+      volumes:
+         - "$PWD/Jenkins_master/data:/var/jenkins_home"
+         - "/var/run/docker.sock:/var/run/docker.sock"
+      environment:
+         - SEED_JOBS_URL=https://github.com/Savostov-Arseny/dsl-jobs.git
+      networks:
+         - net
+      secrets:
+         - juser
+         - jpass
+         - dockeruser
+         - dockerpassword
+networks:
+   net:
+
+secrets:
+  juser:
+    file: ./Jenkins_master/data/juser
+  jpass:
+    file: ./Jenkins_master/data/jpass
+  dockeruser:
+    file:  ./Jenkins_master/data/dockeruser
+  dockerpassword:
+    file:  ./Jenkins_master/data/dockerpassword
