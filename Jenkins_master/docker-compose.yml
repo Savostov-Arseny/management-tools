@@ -19,6 +19,8 @@ services:
          - jpass
          - dockeruser
          - dockerpassword
+         - ansible_host
+         - id_rsa
 networks:
    net:
 
@@ -31,3 +33,7 @@ secrets:
     file:  ./data/dockeruser
   dockerpassword:
     file:  ./data/dockerpassword
+  ansible_host:
+    file: ./data/ansible_host
+  id_rsa:
+    file: /home/ubuntu/.ssh/id_rsa

@@ -17,3 +17,4 @@ ldap
 email-ext
 mailer
 job-dsl
+publish-over-ssh
